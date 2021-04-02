@@ -4,15 +4,14 @@ import com.example.demo.enums.ResultEnums;
 import com.example.demo.response.Response;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
 
-@RestController
+@Controller
 @Slf4j
 public class FileController {
 
@@ -20,6 +19,7 @@ public class FileController {
     private String filePath;
 
     @RequestMapping(value = "/upload")
+    @ResponseBody
     public Response imports(@RequestParam("file") MultipartFile file) {
 
         Response response = new Response();
@@ -49,5 +49,15 @@ public class FileController {
             return response;
         }
         return response;
+    }
+
+
+    /**
+     * 首页
+     * @return
+     */
+    @GetMapping(value = "/index")
+    public String index (){
+        return "index";
     }
 }
